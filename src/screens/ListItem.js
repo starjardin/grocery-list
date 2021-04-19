@@ -52,6 +52,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     padding: 20,
   },
+  sectionContainer: {
+    backgroundColor: '#d3d3d3',
+    paddingVertical: 10,
+  },
+  sectionText: {
+    fontWeight: '600',
+  },
 });
 export const Separator = () => <View style={styles.separator} />;
 
@@ -80,6 +87,14 @@ const RightActions = (progress, dragX) => {
       <Animated.Text style={[styles.actionText, {transform: [{scale}]}]}>
         Delete
       </Animated.Text>
+    </View>
+  );
+};
+
+export const SectionHeadear = ({title}) => {
+  return (
+    <View styles={[styles.container, styles.sectionContainer]}>
+      <Text styles={[styles.sectionText]}>{title}</Text>
     </View>
   );
 };
