@@ -89,6 +89,7 @@ const ListItem = ({
   isFavorite,
   onAddedSwipe,
   onDeleteSwipe,
+  onRowPress,
 }) => {
   let starIcon;
   if (isFavorite) {
@@ -109,14 +110,20 @@ const ListItem = ({
       onSwipeableLeftOpen={onAddedSwipe}
       renderRightActions={onDeleteSwipe && RightActions}
       onSwipeableRightOpen={onDeleteSwipe}>
-      <View style={styles.container}>
-        <Text style={styles.text}>{name}</Text>
-        {onFavoritePress && (
-          <TouchableOpacity onPress={onFavoritePress}>
-            <Image source={starIcon} style={styles.icon} resizeMode="contain" />
-          </TouchableOpacity>
-        )}
-      </View>
+      <TouchableOpacity onPress={onRowPress}>
+        <View style={styles.container}>
+          <Text style={styles.text}>{name}</Text>
+          {onFavoritePress && (
+            <TouchableOpacity onPress={onFavoritePress}>
+              <Image
+                source={starIcon}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+      </TouchableOpacity>
     </Swipeable>
   );
 };

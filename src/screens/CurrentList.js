@@ -5,7 +5,7 @@ import {useCurrentList} from '../util/ListManager';
 
 import ListItem, {Separator} from './ListItem';
 import AddItem from './AddItem';
-export default () => {
+export default ({navigation}) => {
   const {addItem, removeItem, list} = useCurrentList();
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -19,6 +19,7 @@ export default () => {
               isFavorite={index < 5}
               onAddedSwipe={() => removeItem(item.id)}
               onDeleteSwipe={() => removeItem(item.id)}
+              onRowPress={() => navigation.navigate('ItemDetails')}
             />
           )}
           keyExtractor={item => item.id}
