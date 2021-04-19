@@ -19,7 +19,11 @@ export default ({navigation}) => {
               isFavorite={index < 5}
               onAddedSwipe={() => removeItem(item.id)}
               onDeleteSwipe={() => removeItem(item.id)}
-              onRowPress={() => navigation.navigate('ItemDetails')}
+              onRowPress={() =>
+                navigation.navigate('ItemDetails', {
+                  item: item,
+                })
+              }
             />
           )}
           keyExtractor={item => item.id}
