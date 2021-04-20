@@ -2,17 +2,18 @@ import React from 'react';
 import {
   SectionList,
   SafeAreaView,
-  FlatList,
   KeyboardAvoidingView,
+  favorite,
+  addToFavorite,
 } from 'react-native';
 
 import {useCurrentList} from '../util/ListManager';
-
 import ListItem, {SectionHeadear, Separator} from './ListItem';
 import AddItem from './AddItem';
+
 export default ({navigation}) => {
   const {addItem, removeItem, list, addToCart, cart} = useCurrentList();
-  console.log(cart);
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
@@ -28,8 +29,11 @@ export default ({navigation}) => {
           renderItem={({item, index}) => (
             <ListItem
               name={item.name}
-              onFavoritePress={() => alert('todo: handle favorite!')}
-              isFavorite={index < 5}
+              onFavoritePress={() => {
+                alert('todo: handle favorite!');
+                addToFavorite(item);
+              }}
+              isFavorite={item.isFavorite}
               onAddedSwipe={() => addToCart(item)}
               onDeleteSwipe={() => removeItem(item.id)}
               onRowPress={() =>

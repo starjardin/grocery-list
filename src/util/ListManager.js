@@ -7,17 +7,22 @@ const updateStorageCurrentList = list => {
   AsyncStorage.setItem('@@GreceryList/CurrentList', JSON.stringify(list));
 };
 
-const updateStorageCurrentart = list => {
+const updateStorageCurrentCart = list => {
   AsyncStorage.setItem('@@GreceryList/CurrentCart', JSON.stringify(list));
+};
+
+const updateStorageCurrentFavorite = list => {
+  AsyncStorage.setItem('@@GreceryList/CurrentFavorite', JSON.stringify(list));
 };
 
 export const useCurrentList = () => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cart, setCart] = useState([]);
+  const [favorite, setFavorite] = useState([]);
 
   const addItem = text => {
-    const newList = [{id: uuid(), name: text}, ...list];
+    const newList = [{id: uuid(), name: text, isFavorite: false}, ...list];
     setList(newList);
     updateStorageCurrentList(newList);
   };
@@ -32,7 +37,12 @@ export const useCurrentList = () => {
     removeItem(item.id);
     const newCart = [item, ...cart];
     setCart(newCart);
-    updateStorageCurrentart(newCart);
+    updateStorageCurrentCart(newCart);
+  };
+
+  const addToFavorite = item => {
+    const newFavorite = [item, ...favorite];
+    setFavorite(newFavorite);
   };
 
   useEffect(() => {
@@ -61,5 +71,7 @@ export const useCurrentList = () => {
     list,
     addToCart,
     cart,
+    favorite,
+    addToFavorite,
   };
 };
